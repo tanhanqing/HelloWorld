@@ -1,4 +1,5 @@
 [copy来自](https://github.com/guodongxiaren/README/blob/master/README.md)
+仅为了自己方便参看 故拷贝至此
 
 
 README

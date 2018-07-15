@@ -160,3 +160,32 @@ service判断请求类型，决定是调用doGet还是doPost方法
     运行时异常： 都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。
            运行时异常的特点是Java编译器不会检查它，也就是说，当程序中可能出现这类异常，即使没有用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过。 
     非运行时异常 （编译异常）： 是RuntimeException以外的异常，类型上都属于Exception类及其子类。从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
+
+# stuts
+
+![test](https://tanhanqing.github.io/img/stuts.png)
+
+# 动态 静态 include
+
+    动态 INCLUDE 用 jsp:include 动作实现 <jsp:include page="included.jsp" flush="true" /> 它总是会检查所含文件中的变化 , 适合用于包含动态页面 , 并且可以带参数。各个文件分别先编译，然后组合成一个文件。
+    静态 INCLUDE 用 include 伪码实现 , 定不会检查所含文件的变化 , 适用于包含静态页面 <%@ include file="included.htm" %> 。先将文件的代码被原封不动地加入到了主页面从而合成一个文件，然后再进行翻译，此时不允许有相同的变量。 
+
+    以下是对 include 两种用法的区别 ， 主要有两个方面的不同 ;
+    一 : 执行时间上 :
+        <%@ include file="relativeURI"%> 是在翻译阶段执行
+        <jsp:include page="relativeURI" flush="true" /> 在请求处理阶段执行 .
+    二 : 引入内容的不同 :
+        <%@ include file="relativeURI"%>
+        引入静态文本 (html,jsp), 在 JSP 页面被转化成 servlet 之前和它融和到一起 .
+        <jsp:include page="relativeURI" flush="true" /> 引入执行页面或 servlet 所生成的应答文本 
+        
+# JVM内存配置
+
+![test](https://tanhanqing.github.io/img/JVMsetting..png)
+
+    -Xmx10240m：代表最大堆
+    -Xms10240m：代表最小堆
+    -Xmn5120m：代表新生代
+    -XXSurvivorRatio=3：代表Eden:Survivor = 3    根据Generation-Collection算法(目前大部分JVM采用的算法)，一般根据对象的生存周期将堆内存分为若干不同的区域，一般情况将新生代分为Eden ，两块Survivor；    计算Survivor大小， Eden:Survivor = 3，总大小为5120,3x+x+x=5120  x=1024
+    新生代大部分要回收，采用Copying算法，快！
+    老年代 大部分不需要回收，采用Mark-Compact算法

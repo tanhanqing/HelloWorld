@@ -54,3 +54,30 @@
     PROPAGATION_REQUIRES_NEW--新建事务，如果当前存在事务，把当前事务挂起。 
     PROPAGATION_NOT_SUPPORTED--以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。 
     PROPAGATION_NEVER--以非事务方式执行，如果当前存在事务，则抛出异常。 
+
+
+# 有关servlet和cgi的描述
+
+    serlet 各方面都优于cgi 
+    线程 > 进程k
+    可移植性好 
+    轻量级
+
+# servlet service描述
+
+service判断请求类型，决定是调用doGet还是doPost方法
+
+![test](https://tanhanqing.github.io/img/httpservele.png)
+
+# Servlet的生命周期
+
+    Servlet的生命周期
+    1.加载：容器通过类加载器使用Servlet类对应的文件来加载Servlet
+    2.创建：通过调用Servlet的构造函数来创建一个Servlet实例
+    3.初始化：通过调用Servlet的init()方法来完成初始化工作，这个方法是在Servlet已经被创建，但在向客户端提供服务之前调用。
+    4.处理客户请求：Servlet创建后就可以处理请求，当有新的客户端请求时，Web容器都会创建一个新的线程来处理该请求。接着调用Servlet的
+    Service()方法来响应客户端请求（Service方法会根据请求的method属性来调用doGet（）和doPost（））
+    5.卸载：容器在卸载Servlet之前需要调用destroy()方法，让Servlet释放其占用的资源。
+    
+    servlet在多线程下其本身并不是线程安全的。
+    如果在类中定义成员变量，而在service中根据不同的线程对该成员变量进行更改，那么在并发的时候就会引起错误。最好是在方法中，定义局部变量，而不是类变量或者对象的成员变量。由于方法中的局部变量是在栈中，彼此各自都拥有独立的运行空间而不会互相干扰，因此才做到线程安全。

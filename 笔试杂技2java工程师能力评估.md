@@ -181,7 +181,7 @@ service判断请求类型，决定是调用doGet还是doPost方法
         
 # JVM内存配置
 
-![test](https://tanhanqing.github.io/img/JVMsetting..png)
+![test](https://tanhanqing.github.io/img/JVMsetting.png)
 
     -Xmx10240m：代表最大堆
     -Xms10240m：代表最小堆

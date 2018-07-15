@@ -108,3 +108,55 @@ service判断请求类型，决定是调用doGet还是doPost方法
     表达式语言：  
     • Struts1 整合了JSTL，因此使用JSTL EL。这种EL有基本对象图遍历，但是对集合和索引属性的支持很弱。  
     • Struts2可以使用JSTL，但是也支持一个更强大和灵活的表达式语言－－"Object Graph Notation Language" (OGNL). 
+
+# swt swing
+
+           AWT和Swing之间的区别：
+           1)AWT 是基于本地方法的C/C++程序，其运行速度比较快；Swing是基于AWT的Java程序，其运行速度比较慢。
+           2)AWT的控件在不同的平台可能表现不同，而Swing在所有平台表现一致。
+
+           在实际应用中，应该使用AWT还是Swing取决于应用程序所部署的平台类型。例如：
+           1)对于一个嵌入式应用，目标平台的硬件资源往往非常有限，而应用程序的运行速度又是项目中至关重要的因素。在这种矛盾的情况下，简单而高效的AWT当然成了嵌入式Java的第一选择。
+           2)在普通的基于PC或者是工作站的标准Java应用中，硬件资源对应用程序所造成的限制往往不是项目中的关键因素。所以在标准版的Java中则提倡使用Swing， 也就是通过牺牲速度来实现应用程序的功能。
+           
+# 转发重定向
+
+    redirect：请求重定向：客户端行为，本质上为2次请求，地址栏改变，前一次请求对象消失。举例：你去银行办事（forward.jsp），结果告诉你少带了东西，你得先去公安局办(index.html)临时身份证,这时你就会走出银行，自己前往公安局，地址栏变为index.html.
+    forward：请求转发:服务器行为，地址栏不变。举例：你把钱包落在出租车上，你去警察局（forward.jsp）报案，警察局说钱包落在某某公司的出租车上（index.html)，这时你不用亲自去找某某公司的出租车,警察局让出租车自己给你送来，你只要在警察局等就行。所以地址栏不变，依然为forward.jsp
+    
+    
+    
+# 加载驱动方法
+
+    加载驱动方法
+    1.Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    2. DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+    3.System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
+    
+    DriverManager.getConnection方法返回一个Connection对象，这是加载驱动之后才能进行的
+    
+# 多线程
+    Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行。 
+    共同点 ： 
+    1. 他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 
+    
+# 数据加载
+    JVM中一个字节以下的整型数据会在JVM启动的时候加载进内存，除非用new Integer()显式的创建对象，否则都是同一个对象
+    2. wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException。 
+
+    不同点 ：  
+    1.每个对象都有一个锁来控制同步访问。Synchronized关键字可以和对象的锁交互，来实现线程的同步。 
+    sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法。 
+    2.wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用 
+    3.sleep必须捕获异常，而wait，notify和notifyAll不需要捕获异常 
+    4.sleep是线程类（Thread）的方法，导致此线程暂停执行指定时间，给执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep不会释放对象锁。
+    5.wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。
+    
+# exception、
+
+![test](https://tanhanqing.github.io/img/Exception.png)
+
+    
+    运行时异常： 都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。
+           运行时异常的特点是Java编译器不会检查它，也就是说，当程序中可能出现这类异常，即使没有用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过。 
+    非运行时异常 （编译异常）： 是RuntimeException以外的异常，类型上都属于Exception类及其子类。从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
